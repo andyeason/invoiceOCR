@@ -83,7 +83,7 @@ class InvoiceFormatter:
         formatted_invoice = {
             "基本信息": {
                 "发票类型": invoice_data.get("发票类型", "增值税专用发票"),
-                "发票代码": invoice_data.get("发票代码", ""),
+                "发票代码": invoice_data.get("发票号码", ""),
                 "发票号码": InvoiceFormatter.format_invoice_number(invoice_data.get("发票号码", "")),
                 "开票日期": invoice_data.get("开票日期", ""),
                 "校验码": invoice_data.get("校验码", ""),
@@ -91,13 +91,13 @@ class InvoiceFormatter:
             },
             "销售方信息": {
                 "名称": invoice_data.get("销售方名称", ""),
-                "识别号": invoice_data.get("销售方识别号", ""),
+                "识别号": invoice_data.get("销售方统一社会信用代码/纳税人识别号", ""),
                 "地址电话": invoice_data.get("销售方地址、电话", ""),
                 "开户行及账号": invoice_data.get("销售方开户行及账号", "")
             },
             "购买方信息": {
                 "名称": invoice_data.get("购买方名称", ""),
-                "识别号": invoice_data.get("购买方识别号", ""),
+                "识别号": invoice_data.get("购买方统一社会信用代码/纳税人识别号", ""),
                 "地址电话": invoice_data.get("购买方地址、电话", ""),
                 "开户行及账号": invoice_data.get("购买方开户行及账号", "")
             },
@@ -105,7 +105,7 @@ class InvoiceFormatter:
                 "合计金额": InvoiceFormatter.format_amount(invoice_data.get("合计金额", "")),
                 "合计税额": InvoiceFormatter.format_amount(invoice_data.get("合计税额", "")),
                 "价税合计(大写)": invoice_data.get("价税合计(大写)", ""),
-                "价税合计(小写)": InvoiceFormatter.format_amount(invoice_data.get("小写金额", ""))
+                "价税合计(小写)": InvoiceFormatter.format_amount(invoice_data.get("价税合计(小写)", ""))
             },
             "商品信息": items_info,
             "其他信息": {
@@ -116,6 +116,8 @@ class InvoiceFormatter:
             },
             "处理时间": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         }
+
+        print(formatted_invoice)
         
         # 标准化日期格式
         InvoiceFormatter._standardize_date(formatted_invoice, invoice_data)
@@ -179,7 +181,7 @@ class InvoiceFormatter:
         formatted_invoice = {
             "基本信息": {
                 "发票类型": invoice_type,
-                "发票代码": invoice_data.get("发票代码", ""),
+                "发票代码": invoice_data.get("发票号码", ""),
                 "发票号码": InvoiceFormatter.format_invoice_number(invoice_data.get("发票号码", "")),
                 "开票日期": invoice_data.get("开票日期", ""),
                 "校验码": invoice_data.get("校验码", ""),
@@ -187,13 +189,13 @@ class InvoiceFormatter:
             },
             "销售方信息": {
                 "名称": invoice_data.get("销售方名称", ""),
-                "识别号": invoice_data.get("销售方识别号", ""),
+                "识别号": invoice_data.get("销售方统一社会信用代码/纳税人识别号", ""),
                 "地址电话": invoice_data.get("销售方地址、电话", ""),
                 "开户行及账号": invoice_data.get("销售方开户行及账号", "")
             },
             "购买方信息": {
                 "名称": invoice_data.get("购买方名称", ""),
-                "识别号": invoice_data.get("购买方识别号", ""),
+                "识别号": invoice_data.get("购买方统一社会信用代码/纳税人识别号", ""),
                 "地址电话": invoice_data.get("购买方地址、电话", ""),
                 "开户行及账号": invoice_data.get("购买方开户行及账号", "")
             },
@@ -201,7 +203,7 @@ class InvoiceFormatter:
                 "合计金额": InvoiceFormatter.format_amount(invoice_data.get("合计金额", "")),
                 "合计税额": InvoiceFormatter.format_amount(invoice_data.get("合计税额", "")),
                 "价税合计(大写)": invoice_data.get("价税合计(大写)", ""),
-                "价税合计(小写)": InvoiceFormatter.format_amount(invoice_data.get("小写金额", ""))
+                "价税合计(小写)": InvoiceFormatter.format_amount(invoice_data.get("价税合计(小写)", ""))
             },
             "商品信息": items_info,
             "其他信息": {

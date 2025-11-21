@@ -78,7 +78,7 @@ def process_invoice_image(image_path, project_id=None):
         
         # 提取关键信息用于返回
         invoice_data = {
-            'invoice_code': formatted_data.get('基本信息', {}).get('发票代码', ''),
+            'invoice_code': formatted_data.get('基本信息', {}).get('发票号码', ''),
             'invoice_number': formatted_data.get('基本信息', {}).get('发票号码', ''),
             'invoice_type': formatted_data.get('基本信息', {}).get('发票类型', ''),
             'seller_name': formatted_data.get('销售方信息', {}).get('名称', ''),
